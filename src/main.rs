@@ -14,6 +14,7 @@ fn main() {
     let rpcpassword = env::var("RPC_PASSWORD").expect("RPC_PASSWORD non défini");
 
     // Définir le hash du bloc que nous voulons récupérer
+    // idée d'amélioration : récupérer le hash du bloc en paramètre de la commande
     let blockhash = "000000000000000000000cde9048cd9fb053efee1d31f6636201ac868d2d7cdf";
 
     // Exécuter la commande `bitcoin-cli` pour obtenir le bloc correspondant au hash
