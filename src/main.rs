@@ -2,6 +2,7 @@ use bitcoin::blockdata::block::Block;
 use bitcoin::consensus::encode;
 use std::process::Command;
 use std::env;
+use std::io;
 use std::io::Cursor;
 use dotenv::dotenv;
 
@@ -13,9 +14,21 @@ fn main() {
     let rpcuser = env::var("RPC_USER").expect("RPC_USER non défini");
     let rpcpassword = env::var("RPC_PASSWORD").expect("RPC_PASSWORD non défini");
 
-    // Définir le hash du bloc que nous voulons récupérer
-    // idée d'amélioration : récupérer le hash du bloc en paramètre de la commande
-    let blockhash = "000000000000000000000cde9048cd9fb053efee1d31f6636201ac868d2d7cdf";
+    // Ajouter une invite de commande demandant à l'utilisateur de saisir le hash du bloc à récupérer
+    // Donnée brute avec un hash valide : 
+    // let blockhash = "000000000000000000000cde9048cd9fb053efee1d31f6636201ac868d2d7cdf";
+
+    println!("Entrez le hash du bloc que vous voulez récupérer : ");
+    let mut blockhash = String::new();
+    io::stdin().read_line(&mut blockhash).expect("Erreur lors de la lecture de l'entrée");
+
+    // Debug pour afficher le hash saisi par l'utilisateur
+    // println!("Hash brut saisi par l'utilisateur : '{}'", blockhash);
+    // Utilisation de dbg! pour afficher le contenu et les détails
+    // dbg!(&blockhash);
+    
+    // Supprimer les espaces blancs (y compris la nouvelle ligne) à la fin de la chaîne
+    let blockhash = blockhash.trim();
 
     // Exécuter la commande `bitcoin-cli` pour obtenir le bloc correspondant au hash
     // Le résultat est renvoyé en hexadécimal
