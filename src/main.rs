@@ -1,10 +1,12 @@
 use bitcoin::blockdata::block::Block;
 use bitcoin::consensus::encode;
+use chrono::{DateTime};
 use std::process::Command;
 use std::env;
 use std::io;
 use std::io::Cursor;
 use dotenv::dotenv;
+
 
 fn main() {
     // Charger les variables d'environnement depuis un fichier `.env` (s'il existe)
@@ -66,8 +68,11 @@ fn main() {
     println!("Merkle root: {:?}", block.header.merkle_root);
 
     // L'horodatage du bloc (quand le bloc a été miné)
-    println!("Time: {}", block.header.time);
-
+     // Convertir le timestamp Unix en un format de date/heure lisible
+    let datetime = DateTime::from_timestamp(block.header.time as i64, 0).unwrap();
+        
+    println!("Time: {}", datetime.format("%Y-%m-%d %H:%M:%S UTC"));
+    
     // Les bits représentent la cible actuelle pour la difficulté de minage
     println!("Bits: {:?}", block.header.bits);
 
