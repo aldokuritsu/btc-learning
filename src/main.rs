@@ -1,10 +1,17 @@
 use std::io::{self, Write}; // Pour gérer les entrées/sorties
+use std::env; // Pour gérer les arguments
 
 mod parser1;
 mod parser2;
 
 
 fn main() {
+
+// Utilisation des arguments pour déterminer le script à exécuter
+let args: Vec<String> = env::args().collect();
+
+
+if args.len() < 2 {
     println!("\\nQuel script voulez-vous exécuter ?\\n");
     println!("1. Parser1");
     println!("2. Parser2");
@@ -31,5 +38,12 @@ fn main() {
             }
             _ => println!("Choix invalide !"),
         }
-    
+        } else {
+
+        match args[1].as_str() {
+            "parser1" => parser1::run(),
+            "parser2" => parser2::run(),
+            _ => println!("Commande non reconnue : {}", args[1]),
+        }
+    }
 }
