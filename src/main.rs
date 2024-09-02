@@ -3,6 +3,7 @@ use std::env; // Pour gérer les arguments
 
 mod parser1;
 mod parser2;
+mod txparser;
 
 
 fn main() {
@@ -15,14 +16,16 @@ if args.len() < 2 {
     println!("\\nQuel script voulez-vous exécuter ?\\n");
     println!("1. Parser1");
     println!("2. Parser2");
-    println!("3. Quitter");
+    println!("3. Txparser");
+    println!("4. Quitter");
 
     print!("Votre choix : ");
         io::stdout().flush().unwrap(); // S'assurer que l'invite s'affiche
         let mut choice = String::new();
         io::stdin().read_line(&mut choice).unwrap();
 
-        // Voici un hash valide : 000000000000000000000cde9048cd9fb053efee1d31f6636201ac868d2d7cdf
+        // Voici un hash de bloc valide : 000000000000000000000cde9048cd9fb053efee1d31f6636201ac868d2d7cdf
+        // Voici un hash de transaction valide : 72f062588496755ce8f1ed4e6b12eca0ad9ea5118d5fa75698692bd101748cf0
         match choice.trim() {
             "1" => {
                 // Appel du parser1 
@@ -33,12 +36,16 @@ if args.len() < 2 {
                 parser2::run();
             }
             "3" => {
+                // Appel du txparser 
+                txparser::run();
+            }
+            "4" => {
                 // Appel du parser1 
                 println!("Ok, bye !");
             }
             _ => println!("Choix invalide !"),
         }
-        } else {
+    } else {
 
         match args[1].as_str() {
             "parser1" => parser1::run(),
