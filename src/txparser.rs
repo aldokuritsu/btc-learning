@@ -48,9 +48,23 @@ pub fn run() {
     let num_outputs = tx_data["vout"].as_array().unwrap().len();
     let lock_time = tx_data["locktime"].as_i64().unwrap();
 
+
+    // Calculer et afficher le montant total des sorties
+    let mut total_output_value: f64 = 0.0;
+    if let Some(outputs) = tx_data["vout"].as_array() {
+        for output in outputs {
+            if let Some(value) = output["value"].as_f64() {
+                total_output_value += value;
+            }
+        }
+    }
+
     println!("Version de la transaction : {}", version);
     println!("Nombre d'inputs : {}", num_inputs);
     println!("Nombre d'outputs : {}", num_outputs);
     println!("Lock time : {}", lock_time);
+    println!("Montant total des sorties : {:.8} BTC", total_output_value);  // Affichage du montant total avec précision de 8 décimales
 }
 
+        // Voici un hash de bloc valide : 00000000000000000003208c8ad11e9507848536b7b2c68e34a679ac138920fa
+        // Voici un hash de transaction valide : 72f062588496755ce8f1ed4e6b12eca0ad9ea5118d5fa75698692bd101748cf0
