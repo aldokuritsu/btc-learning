@@ -7,7 +7,6 @@ use std::io;
 use std::io::Cursor;
 use dotenv::dotenv;
 
-
 pub fn run() {
     // Charger les variables d'environnement depuis un fichier `.env` (s'il existe)
     dotenv().ok();
