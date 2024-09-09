@@ -24,7 +24,7 @@ if args.len() < 2 {
         let mut choice = String::new();
         io::stdin().read_line(&mut choice).unwrap();
 
-        // Voici un hash de bloc valide : 000000000000000000000cde9048cd9fb053efee1d31f6636201ac868d2d7cdf
+        // Voici un hash de bloc valide : 00000000000000000003208c8ad11e9507848536b7b2c68e34a679ac138920fa
         // Voici un hash de transaction valide : 72f062588496755ce8f1ed4e6b12eca0ad9ea5118d5fa75698692bd101748cf0
         match choice.trim() {
             "1" => {

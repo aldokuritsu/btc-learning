@@ -12,6 +12,7 @@ pub fn run() {
     let mut blockhash = String::new();
     std::io::stdin().read_line(&mut blockhash).expect("Erreur lors de la lecture de l'entrée");
     let blockhash = blockhash.trim();
+    // let blockhash = "000000000000000000000cde9048cd9fb053efee1d31f6636201ac868d2d7cdf";
 
     let output = Command::new("bitcoin-cli")
         .arg(format!("-rpcuser={}", rpcuser))
